@@ -182,7 +182,7 @@ func delivery(product: [String]) {
             }
             if country == "Турция" || country == "Франция" || country == "США" {
                 total = cost * amount! + delivery
-                print("\nИмя: \(name) \nФамилия: \(surname) \nДата заказа: \(date) \nВремя заказа: \(time) \nВремя доставки: \(timeToDelivery) \nЦена за доставку: \(delivery) \nВаш товар: \(product) \nОбщая сумма заказа: \(total) \nОценка клиента: \(rating)")
+                print("\nИмя: \(name) \nФамилия: \(surname) \nДата заказа: \(date) \nВремя заказа: \(time) \nВремя доставки: \(timeToDelivery) \nЦена за доставку: \(delivery) \nОбщая сумма заказа: \(total) \nОценка клиента: \(rating)")
             }
             else{
                 print("\nДоставка в указанную страну недоступна")
