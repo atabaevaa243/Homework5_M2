@@ -126,27 +126,51 @@ var microwave = Electronics(name: "Микроволновка", cost: 25000, exp
 var goodsArray : [GoodsProtocol] = [chicken, vareniki, kolbasa, baget, ikra, cola, water, flash, fuse, juice, poroshok, soap, pasta, cif, gubka, phone, tv, utyug, dyson, microwave]
 
 
-func delivery() {
-    print("Ваше имя:")
-    let name = readLine()!
-    print("Ваша фамилия:")
-    let surname = readLine()!
-    print("Какие продукты добавить в корзину:")
-    let product = readLine()!
-    print("Количество:")
-    let amount = Int(readLine()!)
-    print("Страна куда нужно доставить:")
-    let country = readLine()!
 
+print("Ваше имя:")
+let name = readLine()!
+print("Ваша фамилия:")
+let surname = readLine()!
+var stop = false
+var product: [String] = []
+
+while stop == false{
+    print("Введите название товара:")
+    let productName = readLine()!
+    if productName.count == 0{
+        stop = true
+    }else{
+        product.append(productName)
+    }
+}
+
+print("Количество:")
+let amount = Int(readLine()!)
+print("Страна куда нужно доставить:")
+let country = readLine()!
+
+
+func delivery(product: [String]) {
     let date = "12.12.2022"
     let time = "18.45"
     let timeToDelivery = "1 неделя"
     let rating = "4 звезды"
+    
     var delivery = 0
     var total = 0
+    var cost = 0
+    var bool = false
     
     for i in goodsArray{
-        if i.name == product{
+        for j in product {
+            if j == i.name{
+                bool = true
+                cost += i.cost
+            }
+        }
+    }
+        
+        if bool == true {
             if country == "Турция" {
                 delivery += 1200
             }
@@ -156,13 +180,20 @@ func delivery() {
             if country == "США" {
                 delivery += 2300
             }
-            total = i.cost * amount! + delivery
-            print("\nИмя: \(name) \nФамилия: \(surname) \nДата заказа: \(date) \nВремя заказа: \(time) \nВремя доставки: \(timeToDelivery) \nЦена за доставку: \(delivery) \nВаш товар: \(product) \nОбщая сумма заказа: \(total) \nОценка клиента: \(rating)")
+            if country == "Турция" || country == "Франция" || country == "США" {
+                total = cost * amount! + delivery
+                print("\nИмя: \(name) \nФамилия: \(surname) \nДата заказа: \(date) \nВремя заказа: \(time) \nВремя доставки: \(timeToDelivery) \nЦена за доставку: \(delivery) \nВаш товар: \(product) \nОбщая сумма заказа: \(total) \nОценка клиента: \(rating)")
+            }
+            else{
+                print("\nДоставка в указанную страну недоступна")
+            }
         }
-    }
+        else{
+            print("\nТакого товара нет. Попробуйте еще раз")
+        }
 }
 
-delivery()
+delivery(product: product)
 
 //Имя: Aziza
 //Фамилия: Atabaeva
@@ -173,3 +204,60 @@ delivery()
 //Ваш товар: Телефон Iphone 12pro
 //Общая сумма заказа: 191200
 //Оценка клиента: 4 звезды
+
+
+//func deliveryService(productName: [String], amount: Int, country: String){
+//    let delivery = 500
+//    let date = "6.12.2022"
+//    let time = "00:46"
+//    let timeOfDelivery = "2 недели"
+//    let rating = "5 звезд"
+//    var bool = false
+//    var total = 0
+//    var price = 0
+//
+//    for i in array{
+//        for j in productName{
+//            if j == i.name{
+//                bool = true
+//                price += i.price
+//            }
+//        }
+//    }
+//
+//    if bool == true{
+//        if country == "Казахстан" || country == "Кыргызстан" || country == "Узбекистан"{
+//            total = price * amount + delivery
+//            print("ФИО: \(userName) \nДата заказа: \(date) \nВремя заказа: \(time) \nПримерное время доставки: \(timeOfDelivery) \nЦена за доставку: \(delivery) \nОбщая сумма заказа: \(total) \nОценка: \(rating)")
+//        }else{
+//            print("Доставка в этот город недоступна")
+//        }
+//    }else{
+//        print("Такого товара нет. Попробуйте еще раз")
+//    }
+//
+//}
+//
+//var stop = false
+//var productArray: [String] = []
+//
+//print("Мы доставляем в Казахстан, Кыргызстан, Узбекистан.\nВведите название товара и количество, а так же страну, куда хотите отправить")
+//print("Введите ФИО:")
+//var userName = readLine()!
+//
+//while stop == false{
+//    print("Введите название товара:")
+//    let productName = readLine()!
+//    if productName.count == 0{
+//        stop = true
+//    }else{
+//        productArray.append(productName)
+//    }
+//}
+//
+//print("Введите кол-во:")
+//var amount = readLine()!
+//print("Введите страну:")
+//var country = readLine()!
+//
+//deliveryService(productName: productArray, amount: Int(amount)!, country: country)
